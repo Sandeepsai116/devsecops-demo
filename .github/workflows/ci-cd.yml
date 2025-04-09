@@ -78,8 +78,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     env:
-      REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
+      REGISTRY: ghcr.io  # GitHub Container Registry, change to docker.io if using Docker Hub or other registry
+      IMAGE_NAME: ${{ github.repository }}  # This uses the repo's full name like 'owner/repo'
     outputs:
       image_tag: ${{ steps.set_output.outputs.image_tag }}
     steps:
@@ -100,7 +100,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+          password: ${{ secrets.TOKEN }}  # Your GitHub Token stored as a secret
       
       - name: Extract metadata for Docker
         id: meta
@@ -163,7 +163,7 @@ jobs:
         env:
           IMAGE_TAG: sha-${{ github.sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          REGISTRY: ghcr.io
+          REGISTRY: ghcr.io  # If using a different registry, change this
         run: |
           # Define the new image with tag
           NEW_IMAGE="${REGISTRY}/${GITHUB_REPOSITORY}:${IMAGE_TAG}"
