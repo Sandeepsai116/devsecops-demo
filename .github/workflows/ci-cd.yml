@@ -79,9 +79,9 @@ jobs:
     needs: [build]
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
+      IMAGE_NAME: Sandeepsaii116/devsecops-demo
     outputs:
-      image_tag: ${{ steps.set_output.outputs.image_tag }}
+      image_tag: ghcr.io/sandeepsai116/devsecops-demo:sha-sha-57a744b626192b57ce396b8db522b7627394da44
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
